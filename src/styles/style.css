@@ -1,6 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100vw;
   height: 100vh;
 }
@@ -39,4 +41,35 @@
   justify-content: center;
   align-items: center;
   color: #ffffff;
+}
+
+.letras-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 664px;
+  height: 91px;
+}
+
+.letras-container button {
+  width: 40px;
+  height: 40px;
+
+  background-color: #e1ecf4;
+  border: 1px solid #7aa7c7;
+  border-radius: 3px;
+  margin: 12px 11px;
+  color: #39739d;
+
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+.chute-container button {
+  background-color: #e1ecf4;
+  border: 1px solid #7aa7c7;
+  border-radius: 3px;
+  margin: 12px 11px;
+  color: #39739d;
+  font-size: 16px;
 }

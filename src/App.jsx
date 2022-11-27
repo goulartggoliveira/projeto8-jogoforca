@@ -44,9 +44,7 @@ function App() {
   return (
     <div className="container">
       <Jogo forca0={forca0} />
-      {/* <Letras alfabeto={alfabeto} /> */}
-
-      {alfabeto.map((letras = <button>{letras}</button>))}
+      <Letras alfabeto={alfabeto} />
       <Chute />
     </div>
   );
