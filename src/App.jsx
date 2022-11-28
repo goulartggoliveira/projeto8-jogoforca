@@ -48,11 +48,14 @@ function App() {
   const [palavraBranca, setpalavraBranca] = useState([]);
   const [letrasSelecionadas, setletrasSelecionadas] = useState(alfabeto);
   const [palavraCerta, setpalavraCerta] = useState("");
+  const [chute, setChute] = useState("");
 
   function iniciarJogo() {
     setDisableInput(false);
     escolherPalavra();
     setletrasSelecionadas([]);
+    setcontadorErros(0);
+    setChute("");
   }
 
   function escolherPalavra() {
@@ -94,6 +97,22 @@ function App() {
     console.log("Erroooooou");
   }
 
+  function acertarNoChute() {
+    let palavraChutada = "";
+    palavraSelecionada.forEach((letra) => (palavraChutada += letra));
+    if (chute === palavraChutada) {
+      console.log("acerto");
+    } else {
+      console.log("perdeu");
+      setcontadorErros(6);
+    }
+    jogoFinalizado();
+  }
+
+  function jogoFinalizado() {
+    console.log("jogo terminado");
+  }
+
   return (
     <div className="container">
       <Jogo
@@ -101,6 +120,7 @@ function App() {
         iniciarJogo={iniciarJogo}
         contadorErros={contadorErros}
         palavraBranca={palavraBranca}
+        acertarNoChute={acertarNoChute}
       />
       <Letras
         alfabeto={alfabeto}
@@ -109,7 +129,12 @@ function App() {
         letrasSelecionadas={letrasSelecionadas}
       />
 
-      <Chute disableInput={disableInput} />
+      <Chute
+        disableInput={disableInput}
+        chute={chute}
+        setChute={setChute}
+        acertarNoChute={acertarNoChute}
+      />
     </div>
   );
 }
