@@ -7,8 +7,11 @@ export default function Chute(props) {
         disabled={props.disableInput}
         value={props.chute}
         onChange={(e) => props.setChute(e.target.value)}
+        data-test="guess-input"
       />
-      <button onClick={props.acertarNoChute}>Chutar</button>
+      <button onClick={props.acertarNoChute} data-test="guess-button">
+        Chutar
+      </button>
     </div>
   );
 }

@@ -1,5 +1,4 @@
 export default function Letras(props) {
-  const { alfabeto } = props;
   return (
     <div className="letras-container">
       {props.alfabeto.map((a) => (
@@ -7,6 +6,7 @@ export default function Letras(props) {
           onClick={() => props.letrasClicadas(a)}
           key={a}
           disabled={props.letrasSelecionadas.includes(a)}
+          data-test="letter"
         >
           {a}
         </button>
