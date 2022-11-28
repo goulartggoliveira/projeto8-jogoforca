@@ -17,6 +17,15 @@
   font-family: "Noto Sans", sans-serif;
   font-size: 50px;
 }
+.preto {
+  color: black;
+}
+.vermelho {
+  color: red;
+}
+.verde {
+  color: green;
+}
 
 .jogo-container img {
   width: 400px;
@@ -134,4 +143,11 @@
   color: #39739d;
   font-size: 16px;
   cursor: pointer;
+}
+
+.chute-container button:disabled {
+  background-color: #9faab5;
+  border: 1px solid #7aa7c7;
+  color: #798a9f;
+  cursor: default;
 }

@@ -49,6 +49,7 @@ function App() {
   const [letrasSelecionadas, setletrasSelecionadas] = useState(alfabeto);
   const [palavraCerta, setpalavraCerta] = useState("");
   const [chute, setChute] = useState("");
+  const [corResposta, setcorResposta] = useState("preto");
 
   function iniciarJogo() {
     setDisableInput(false);
@@ -56,6 +57,7 @@ function App() {
     setletrasSelecionadas([]);
     setcontadorErros(0);
     setChute("");
+    setcorResposta("preto");
   }
 
   function escolherPalavra() {
@@ -66,7 +68,6 @@ function App() {
     const espacoBranco = [];
     arrayP.forEach((P) => espacoBranco.push("_ "));
     setpalavraBranca(espacoBranco);
-    console.log(palavra);
     setpalavraCerta(palavra);
   }
 
@@ -79,10 +80,8 @@ function App() {
       letraErrada(letra);
     }
   }
-  console.log(letrasSelecionadas);
 
   function letraCerta(letra) {
-    console.log("acertou");
     let novaPalavraBranca = [...palavraBranca];
     palavraSelecionada.forEach((l, i) => {
       if (palavraCerta[i] === letra) {
@@ -90,27 +89,38 @@ function App() {
       }
     });
     setpalavraBranca(novaPalavraBranca);
+
+    if (!novaPalavraBranca.includes("_ ")) {
+      setcorResposta("verde");
+      jogoFinalizado();
+    }
   }
   function letraErrada(letra) {
     let somaErros = contadorErros + 1;
     setcontadorErros(somaErros);
-    console.log("Erroooooou");
+
+    if (somaErros === 6) {
+      setcorResposta("vermelho");
+      jogoFinalizado();
+    }
   }
 
   function acertarNoChute() {
     let palavraChutada = "";
     palavraSelecionada.forEach((letra) => (palavraChutada += letra));
     if (chute === palavraChutada) {
-      console.log("acerto");
+      setcorResposta("verde");
     } else {
-      console.log("perdeu");
+      setcorResposta("vermelho");
       setcontadorErros(6);
     }
     jogoFinalizado();
   }
 
   function jogoFinalizado() {
-    console.log("jogo terminado");
+    setpalavraBranca(palavraSelecionada);
+    setletrasSelecionadas(alfabeto);
+    setDisableInput(true);
   }
 
   return (
@@ -121,6 +131,7 @@ function App() {
         contadorErros={contadorErros}
         palavraBranca={palavraBranca}
         acertarNoChute={acertarNoChute}
+        corResposta={corResposta}
       />
       <Letras
         alfabeto={alfabeto}
