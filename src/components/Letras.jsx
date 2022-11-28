@@ -3,7 +3,11 @@ export default function Letras(props) {
   return (
     <div className="letras-container">
       {props.alfabeto.map((a) => (
-        <button key={a} disabled>
+        <button
+          onClick={() => props.letrasClicadas(a)}
+          key={a}
+          disabled={props.letrasSelecionadas.includes(a)}
+        >
           {a}
         </button>
       ))}

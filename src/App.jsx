@@ -46,10 +46,13 @@ function App() {
   const [contadorErros, setcontadorErros] = useState(0);
   const [palavraSelecionada, setpalavraSelecionada] = useState([]);
   const [palavraBranca, setpalavraBranca] = useState([]);
+  const [letrasSelecionadas, setletrasSelecionadas] = useState(alfabeto);
+  const [palavraCerta, setpalavraCerta] = useState("");
 
   function iniciarJogo() {
     setDisableInput(false);
     escolherPalavra();
+    setletrasSelecionadas([]);
   }
 
   function escolherPalavra() {
@@ -61,8 +64,34 @@ function App() {
     arrayP.forEach((P) => espacoBranco.push("_ "));
     setpalavraBranca(espacoBranco);
     console.log(palavra);
-    console.log(palavraBranca);
-    console.log(palavraSelecionada);
+    setpalavraCerta(palavra);
+  }
+
+  function letrasClicadas(letra) {
+    setletrasSelecionadas([...letrasSelecionadas, letra]);
+
+    if (palavraCerta.includes(letra)) {
+      letraCerta(letra);
+    } else {
+      letraErrada(letra);
+    }
+  }
+  console.log(letrasSelecionadas);
+
+  function letraCerta(letra) {
+    console.log("acertou");
+    let novaPalavraBranca = [...palavraBranca];
+    palavraSelecionada.forEach((l, i) => {
+      if (palavraCerta[i] === letra) {
+        novaPalavraBranca[i] = l;
+      }
+    });
+    setpalavraBranca(novaPalavraBranca);
+  }
+  function letraErrada(letra) {
+    let somaErros = contadorErros + 1;
+    setcontadorErros(somaErros);
+    console.log("Erroooooou");
   }
 
   return (
@@ -73,7 +102,13 @@ function App() {
         contadorErros={contadorErros}
         palavraBranca={palavraBranca}
       />
-      <Letras alfabeto={alfabeto} />
+      <Letras
+        alfabeto={alfabeto}
+        disableInput={disableInput}
+        letrasClicadas={letrasClicadas}
+        letrasSelecionadas={letrasSelecionadas}
+      />
+
       <Chute disableInput={disableInput} />
     </div>
   );

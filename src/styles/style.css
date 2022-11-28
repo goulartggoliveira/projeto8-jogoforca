@@ -67,6 +67,13 @@
   cursor: pointer;
 }
 
+.letras-container button:disabled {
+  background-color: #9faab5;
+  border: 1px solid #7aa7c7;
+  color: #798a9f;
+  cursor: default;
+}
+
 .chute-container {
   display: flex;
   align-items: center;
