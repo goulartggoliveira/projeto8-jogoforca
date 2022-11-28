@@ -39,13 +39,42 @@ const alfabeto = [
   "y",
   "z",
 ];
+const forcaImagens = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 
 function App() {
+  const [disableInput, setDisableInput] = useState(true);
+  const [contadorErros, setcontadorErros] = useState(0);
+  const [palavraSelecionada, setpalavraSelecionada] = useState([]);
+  const [palavraBranca, setpalavraBranca] = useState([]);
+
+  function iniciarJogo() {
+    setDisableInput(false);
+    escolherPalavra();
+  }
+
+  function escolherPalavra() {
+    let indice = Math.floor(Math.random() * Palavras.length);
+    const palavra = Palavras[indice];
+    const arrayP = palavra.split("");
+    setpalavraSelecionada(arrayP);
+    const espacoBranco = [];
+    arrayP.forEach((P) => espacoBranco.push("_ "));
+    setpalavraBranca(espacoBranco);
+    console.log(palavra);
+    console.log(palavraBranca);
+    console.log(palavraSelecionada);
+  }
+
   return (
     <div className="container">
-      <Jogo forca0={forca0} />
+      <Jogo
+        forcaImagens={forcaImagens}
+        iniciarJogo={iniciarJogo}
+        contadorErros={contadorErros}
+        palavraBranca={palavraBranca}
+      />
       <Letras alfabeto={alfabeto} />
-      <Chute />
+      <Chute disableInput={disableInput} />
     </div>
   );
 }

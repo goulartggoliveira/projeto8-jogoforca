@@ -3,7 +3,9 @@ export default function Letras(props) {
   return (
     <div className="letras-container">
       {props.alfabeto.map((a) => (
-        <button>{a}</button>
+        <button key={a} disabled>
+          {a}
+        </button>
       ))}
     </div>
   );
